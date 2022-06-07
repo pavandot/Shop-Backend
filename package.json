@@ -5,8 +5,11 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start": "node dist/index.js",
-		"dev": "nodemon  ./server/index.js"
+		"start": "node ./server/index.js",
+		"server": "nodemon  ./server/index.js",
+		"client": "pnpm --prefix ./client/ run dev",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postBuild": "NPM_CONFIG_PRODUCTION=false pnpm install --prefix client && pnpm --prefix client run build"
 	},
 	"keywords": [],
 	"author": "",
@@ -20,6 +23,7 @@
 		"mongoose": "^6.3.5"
 	},
 	"devDependencies": {
+		"concurrently": "^7.2.1",
 		"nodemon": "^2.0.16"
 	}
 }
