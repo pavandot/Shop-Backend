@@ -18,6 +18,13 @@ export const addProduct = asyncHandler(async (req, res) => {
 			message: 'Please provide all required fields',
 		});
 	}
+	const productValidation = await Product.findOne({ name: productBody.name });
+	if (productValidation) {
+		return res.status(400).json({
+			statusCode: 400,
+			message: 'Product already exists',
+		});
+	}
 	const product = await Product.create(productBody);
 	res.status(201).json({
 		statusCode: 201,

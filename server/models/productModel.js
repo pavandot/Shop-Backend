@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { brandCustomEnumFunction } from '../utils/utils.js';
 const { Schema, model } = mongoose;
 
 const productSchema = new Schema({
@@ -8,7 +9,7 @@ const productSchema = new Schema({
 	},
 	brand: {
 		type: String,
-		required: true,
+		validate: (v) => brandCustomEnumFunction(v),
 	},
 	category: {
 		type: String,

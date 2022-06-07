@@ -8,6 +8,7 @@ import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
+import brandRoutes from './routes/brandRoutes.js';
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.use('/products', productRoutes);
 app.use('/user', userRoutes);
 app.use('/cart', cartRoutes);
 app.use('/wishlist', wishlistRoutes);
+app.use('/brand', brandRoutes);
 
 app.use(errorHandler);
 connectDB();
