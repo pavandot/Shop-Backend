@@ -32,6 +32,26 @@ export const addProduct = asyncHandler(async (req, res) => {
 	});
 });
 
+export const getProduct = asyncHandler(async (req, res) => {
+	if (!req.params.id) {
+		return res.status(400).json({
+			statusCode: 400,
+			message: 'Please provide an id',
+		});
+	}
+	const product = await Product.findById(req.params.id);
+	if (!product) {
+		return res.status(404).json({
+			statusCode: 404,
+			message: 'Product not found',
+		});
+	}
+	res.status(200).json({
+		statusCode: 200,
+		product,
+	});
+});
+
 export const deleteProduct = asyncHandler(async (req, res) => {
 	const productId = req.params.id;
 	if (!productId) {
