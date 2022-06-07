@@ -8,7 +8,7 @@
 		"server": "nodemon  ./server/index.js",
 		"client": "pnpm --prefix ./client/ run dev",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false pnpm install --prefix client && pnpm --prefix client run build"
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
 	"keywords": [],
 	"author": "",
