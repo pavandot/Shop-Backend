@@ -1,6 +1,7 @@
-import { Router } from 'express';
-import { addBrand, getBrands } from '../controllers/brandController.js';
+const { Router } = require('express');
+const { addBrand, getBrands } = require('../controllers/brandController');
 const router = Router();
 router.post('/', addBrand);
 router.get('/', getBrands);
-export default router;
+
+module.exports = router;

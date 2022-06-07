@@ -1,7 +1,8 @@
-import asyncHandler from 'express-async-handler';
-import Wishlist from '../models/wishlistModel.js';
+const asyncHandler = require('express-async-handler');
 
-export const getWishlist = asyncHandler(async (req, res) => {
+const Wishlist = require('../models/wishlistModel.js');
+
+const getWishlist = asyncHandler(async (req, res) => {
 	if (!req.user) {
 		return res.status(401).json({
 			statusCode: 401,
@@ -16,7 +17,7 @@ export const getWishlist = asyncHandler(async (req, res) => {
 	});
 });
 
-export const addToWishlist = asyncHandler(async (req, res) => {
+const addToWishlist = asyncHandler(async (req, res) => {
 	if (!req.user) {
 		return res.status(401).json({
 			statusCode: 401,
@@ -55,7 +56,7 @@ export const addToWishlist = asyncHandler(async (req, res) => {
 	});
 });
 
-export const deleteWishlistItem = asyncHandler(async (req, res) => {
+const deleteWishlistItem = asyncHandler(async (req, res) => {
 	if (!req.user) {
 		return res.status(401).json({
 			statusCode: 401,
@@ -84,3 +85,9 @@ export const deleteWishlistItem = asyncHandler(async (req, res) => {
 		message: 'Wishlist item deleted',
 	});
 });
+
+module.exports = {
+	getWishlist,
+	addToWishlist,
+	deleteWishlistItem,
+};

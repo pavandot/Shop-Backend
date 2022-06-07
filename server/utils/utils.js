@@ -1,6 +1,8 @@
-import Brand from '../models/brandModel.js';
+const Brand = require('../models/brandModel.js');
 
-export const brandCustomEnumFunction = async (v) => {
+const brandCustomEnumFunction = async (v) => {
 	const brand = await Brand.findOne({ name: v });
 	return !!brand;
 };
+
+module.exports = { brandCustomEnumFunction };

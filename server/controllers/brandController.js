@@ -1,6 +1,6 @@
-import asyncHandler from 'express-async-handler';
-import Brand from '../models/brandModel.js';
-export const addBrand = asyncHandler(async (req, res) => {
+const asyncHandler = require('express-async-handler');
+const Brand = require('../models/brandModel.js');
+const addBrand = asyncHandler(async (req, res) => {
 	if (!req.body.name) {
 		return res.status(400).json({
 			statusCode: 400,
@@ -21,10 +21,15 @@ export const addBrand = asyncHandler(async (req, res) => {
 	});
 });
 
-export const getBrands = asyncHandler(async (req, res) => {
+const getBrands = asyncHandler(async (req, res) => {
 	const brands = await Brand.find();
 	res.status(200).json({
 		statusCode: 200,
 		brands,
 	});
 });
+
+module.exports = {
+	addBrand,
+	getBrands,
+};

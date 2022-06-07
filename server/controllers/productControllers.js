@@ -1,8 +1,8 @@
-import asyncHandler from 'express-async-handler';
+const asyncHandler = require('express-async-handler');
 
-import Product from '../models/productModel.js';
+const Product = require('../models/productModel.js');
 
-export const getProducts = asyncHandler(async (req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
 	const products = await Product.find();
 	res.status(200).json({
 		statusCode: 200,
@@ -10,7 +10,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 	});
 });
 
-export const addProduct = asyncHandler(async (req, res) => {
+const addProduct = asyncHandler(async (req, res) => {
 	const productBody = req.body;
 	if (!productBody.imageURL || !productBody.brand || !productBody.category || !productBody.name || !productBody.amount) {
 		return res.status(400).json({
@@ -32,7 +32,7 @@ export const addProduct = asyncHandler(async (req, res) => {
 	});
 });
 
-export const getProduct = asyncHandler(async (req, res) => {
+const getProduct = asyncHandler(async (req, res) => {
 	if (!req.params.id) {
 		return res.status(400).json({
 			statusCode: 400,
@@ -52,7 +52,7 @@ export const getProduct = asyncHandler(async (req, res) => {
 	});
 });
 
-export const deleteProduct = asyncHandler(async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
 	const productId = req.params.id;
 	if (!productId) {
 		return res.status(400).json({
@@ -72,3 +72,10 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 		data: product,
 	});
 });
+
+module.exports = {
+	getProducts,
+	addProduct,
+	getProduct,
+	deleteProduct,
+};

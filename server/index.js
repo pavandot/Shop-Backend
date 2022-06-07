@@ -1,17 +1,19 @@
 // import path module
-import * as path from 'path';
-import express from 'express';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
-import { errorHandler } from './middleware/errorMiddleware.js';
+const path = require('path');
+const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+
+// Middleware
+const errorHandler = require('./middleware/errorMiddleware');
 
 // Routes
-import productRoutes from './routes/productRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import cartRoutes from './routes/cartRoutes.js';
-import wishlistRoutes from './routes/wishlistRoutes.js';
-import brandRoutes from './routes/brandRoutes.js';
-import categoryRoutes from './routes/categoryRoutes.js';
+const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const wishlistRoutes = require('./routes/wishlistRoutes');
+const brandRoutes = require('./routes/brandRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 
 dotenv.config();
 const port = process.env.PORT || 5000;

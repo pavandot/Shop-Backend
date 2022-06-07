@@ -1,6 +1,7 @@
-import asyncHandler from 'express-async-handler';
-import Category from '../models/categoryModel.js';
-export const addCategory = asyncHandler(async (req, res) => {
+const asyncHandler = require('express-async-handler');
+const Category = require('../models/categoryModel');
+
+const addCategory = asyncHandler(async (req, res) => {
 	if (!req.body.name) {
 		return res.status(400).json({
 			statusCode: 400,
@@ -21,10 +22,15 @@ export const addCategory = asyncHandler(async (req, res) => {
 	});
 });
 
-export const getCategories = asyncHandler(async (req, res) => {
+const getCategories = asyncHandler(async (req, res) => {
 	const categories = await Category.find();
 	res.status(200).json({
 		statusCode: 200,
 		categories,
 	});
 });
+
+module.exports = {
+	addCategory,
+	getCategories,
+};

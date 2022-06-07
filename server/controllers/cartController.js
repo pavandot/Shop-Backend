@@ -1,8 +1,8 @@
-import asyncHandler from 'express-async-handler';
-import Cart from '../models/cartModel.js';
-import Product from '../models/productModel.js';
+const asyncHandler = require('express-async-handler');
+const Cart = require('../models/cartModel');
+const Product = require('../models/productModel');
 
-export const getCartItems = asyncHandler(async (req, res) => {
+const getCartItems = asyncHandler(async (req, res) => {
 	if (!req.user) {
 		return res.status(401).json({
 			statusCode: 401,
@@ -17,7 +17,7 @@ export const getCartItems = asyncHandler(async (req, res) => {
 	});
 });
 
-export const addToCart = asyncHandler(async (req, res) => {
+const addToCart = asyncHandler(async (req, res) => {
 	if (!req.user) {
 		return res.status(401).json({
 			statusCode: 401,
@@ -65,7 +65,7 @@ export const addToCart = asyncHandler(async (req, res) => {
 	});
 });
 
-export const updateCartItem = asyncHandler(async (req, res) => {
+const updateCartItem = asyncHandler(async (req, res) => {
 	const { cartId } = req.params;
 	const cartItem = await Cart.findById(cartId);
 
@@ -90,7 +90,7 @@ export const updateCartItem = asyncHandler(async (req, res) => {
 	});
 });
 
-export const deleteCartItem = asyncHandler(async (req, res) => {
+const deleteCartItem = asyncHandler(async (req, res) => {
 	const { cartId } = req.params;
 	const cartItem = await Cart.findById(cartId);
 
@@ -114,3 +114,10 @@ export const deleteCartItem = asyncHandler(async (req, res) => {
 		message: 'Cart item deleted',
 	});
 });
+
+module.exports = {
+	getCartItems,
+	addToCart,
+	updateCartItem,
+	deleteCartItem,
+};

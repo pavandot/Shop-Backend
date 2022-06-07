@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
-import { brandCustomEnumFunction } from '../utils/utils.js';
-const { Schema, model } = mongoose;
+const { Schema, model } = require('mongoose');
+const { brandCustomEnumFunction } = require('../utils/utils.js');
 
 const productSchema = new Schema({
 	imageURL: {
@@ -27,4 +26,4 @@ const productSchema = new Schema({
 
 const Product = model('Product', productSchema);
 
-export default Product;
+module.exports = Product;

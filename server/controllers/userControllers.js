@@ -1,9 +1,9 @@
-import asyncHandler from 'express-async-handler';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
+const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/userModel.js');
 
-export const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
 	let { userName, email, password } = req.body;
 	if (!userName || !email || !password) {
 		return res.status(400).json({
@@ -55,7 +55,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 	}
 });
 
-export const loginUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
 	let { email, password } = req.body;
 	if (!email || !password) {
 		return res.status(400).json({
@@ -100,4 +100,9 @@ const generateAuthToken = (user) => {
 	} else {
 		throw new Error('JWT_SECRET is not defined');
 	}
+};
+
+module.exports = {
+	registerUser,
+	loginUser,
 };
