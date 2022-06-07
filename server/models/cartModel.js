@@ -3,10 +3,9 @@ const { Schema, model } = mongoose;
 
 const cartSchema = new Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'User' },
-	productId: { type: Schema.Types.ObjectId, ref: 'Product' },
+	product: { type: Schema.Types.ObjectId, ref: 'Product' },
 	size: { type: String, required: true },
 	quantity: { type: Number, required: true },
-	total: { type: Number, required: true },
 });
 
 const Cart = model('Cart', cartSchema);
