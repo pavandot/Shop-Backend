@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
+import wishlistRoutes from './routes/wishlistRoutes.js';
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/products', productRoutes);
 app.use('/user', userRoutes);
 app.use('/cart', cartRoutes);
+app.use('/wishlist', wishlistRoutes);
 
 app.use(errorHandler);
 connectDB();
