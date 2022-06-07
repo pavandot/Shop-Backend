@@ -2,7 +2,7 @@
 	"name": "shope",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "index.cjs",
 	"type": "module",
 	"scripts": {
 		"start": "node ./server/index.js",
