@@ -10,12 +10,7 @@ function App() {
 		};
 		fetchData();
 	}, []);
-	return (
-		<section>
-			<h1>Hello</h1>
-			{products && products.map((product) => <p>{product.name}</p>)}
-		</section>
-	);
+	return <section>{products && products.map((product) => <p className=' text-red-500'>{product.name}</p>)}</section>;
 }
 
 export default App;
