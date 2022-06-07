@@ -7,6 +7,13 @@ export const addBrand = asyncHandler(async (req, res) => {
 			message: 'Please provide a name',
 		});
 	}
+	const validBrand = await Brand.findOne({ name: req.body.name });
+	if (validBrand) {
+		return res.status(400).json({
+			statusCode: 400,
+			message: 'Brand already exists',
+		});
+	}
 	const brand = await Brand.create(req.body);
 	res.status(201).json({
 		statusCode: 201,
