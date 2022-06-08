@@ -19,7 +19,7 @@ const addProduct = asyncHandler(async (req, res) => {
 		});
 	}
 
-	const productValidation = await Product.findOne({ name: productBody.name });
+	const productValidation = await Product.findOne({ name: productBody.name, brand: productBody.brand });
 	if (productValidation) {
 		return res.status(400).json({
 			statusCode: 400,
