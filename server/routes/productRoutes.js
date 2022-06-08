@@ -3,7 +3,7 @@ const { addProduct, getProducts, deleteProduct, getProduct } = require('../contr
 const upload = require('../middleware/imageUploadMiddleware');
 const router = Router();
 router.get('/', getProducts);
-router.post('/', upload.single('imageURL'), addProduct);
+router.post('/', addProduct);
 router.delete('/:id', deleteProduct);
 router.get('/:id', getProduct);
 
