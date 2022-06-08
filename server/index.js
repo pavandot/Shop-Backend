@@ -1,5 +1,4 @@
 // import path module
-const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -30,14 +29,6 @@ app.use('/cart', cartRoutes);
 app.use('/wishlist', wishlistRoutes);
 app.use('/brand', brandRoutes);
 app.use('/categories', categoryRoutes);
-
-// Serve frontend
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../client/build')));
-	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
-} else {
-	app.get('/', (req, res) => res.send('Please set to production'));
-}
 
 app.use(errorHandler);
 app.listen(port, () => {
