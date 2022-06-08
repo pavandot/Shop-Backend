@@ -22,7 +22,7 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use('/uploads', express.static('uploads'));
 app.use('/products', productRoutes);
 app.use('/user', userRoutes);
 app.use('/cart', cartRoutes);

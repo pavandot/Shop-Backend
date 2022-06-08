@@ -12,12 +12,14 @@ const getProducts = asyncHandler(async (req, res) => {
 
 const addProduct = asyncHandler(async (req, res) => {
 	const productBody = req.body;
-	if (!productBody.imageURL || !productBody.brand || !productBody.category || !productBody.name || !productBody.amount) {
+	if (!productBody.brand || !productBody.category || !productBody.name || !productBody.amount || !req.file) {
 		return res.status(400).json({
 			statusCode: 400,
 			message: 'Please provide all required fields',
 		});
 	}
+	productBody.imageURL = `/uploads/images/${req.file.filename}`;
+
 	const productValidation = await Product.findOne({ name: productBody.name });
 	if (productValidation) {
 		return res.status(400).json({

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const { brandCustomEnumFunction } = require('../utils/utils.js');
+const { brandCustomEnumFunction, categoryCustomEnumFunction } = require('../utils/utils.js');
 
 const productSchema = new Schema({
 	imageURL: {
@@ -8,11 +8,13 @@ const productSchema = new Schema({
 	},
 	brand: {
 		type: String,
+		required: true,
 		validate: (v) => brandCustomEnumFunction(v),
 	},
 	category: {
 		type: String,
 		required: true,
+		validate: (v) => categoryCustomEnumFunction(v),
 	},
 	name: {
 		type: String,
