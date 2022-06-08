@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Brand = require('../models/brandModel.js');
+
 const addBrand = asyncHandler(async (req, res) => {
 	if (!req.body.name) {
 		return res.status(400).json({
