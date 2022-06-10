@@ -34,7 +34,7 @@ app.use('/products', productRoutes);
 app.use('/user', userRoutes);
 app.use('/cart', cartRoutes);
 app.use('/wishlist', wishlistRoutes);
-app.use('/brand', brandRoutes);
+app.use('/brands', brandRoutes);
 app.use('/categories', categoryRoutes);
 
 app.use(errorHandler);
