@@ -91,9 +91,30 @@ const deleteCartItem = asyncHandler(async (req, res) => {
 	});
 });
 
+const getCartQuantity = asyncHandler(async (req, res) => {
+	try {
+		const cartItems = await Cart.find({ user: req.user.id }).select('quantity').lean();
+
+		let totalQuantity = 0;
+		cartItems.forEach((item) => {
+			totalQuantity += item.quantity;
+		});
+		res.status(200).json({
+			statusCode: 200,
+			totalQuantity,
+		});
+	} catch (err) {
+		res.status(500).json({
+			statusCode: 500,
+			message: 'Server error',
+		});
+	}
+});
+
 module.exports = {
 	getCartItems,
 	addToCart,
 	updateCartItem,
 	deleteCartItem,
+	getCartQuantity,
 };
