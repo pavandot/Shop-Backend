@@ -18,51 +18,27 @@ const getCartItems = asyncHandler(async (req, res) => {
 });
 
 const addToCart = asyncHandler(async (req, res) => {
-	if (!req.user) {
-		return res.status(401).json({
-			statusCode: 401,
-			message: 'Please login to add to cart',
-		});
-	}
-
-	if (!req.body.product || !req.body.size || !req.body.quantity) {
-		return res.status(400).json({
-			statusCode: 400,
-			message: 'Please provide all required fields',
-		});
-	}
-
-	const productItem = await Product.findById(req.body.product);
-	if (!productItem) {
-		return res.status(404).json({
-			statusCode: 404,
-			message: 'Product not found',
-		});
-	}
-
-	const cartItem = await Cart.findOne({
-		user: req.user._id,
-		product: req.body.product,
-	});
-
-	if (cartItem) {
-		return res.status(400).json({
-			statusCode: 400,
-			message: 'Product already in cart',
-		});
-	}
-
 	const cartBody = {
 		user: req.user.id,
 		product: req.body.product,
 		size: req.body.size,
 		quantity: req.body.quantity,
 	};
-	const cart = await Cart.create(cartBody);
-	res.status(201).json({
-		statusCode: 201,
-		data: cart,
-	});
+	const cartItem = await Cart.isCartItemExist(cartBody.user, cartBody.product);
+	if (!cartItem || cartBody.size !== cartItem.size) {
+		const cart = await Cart.create(cartBody);
+		res.status(201).json({
+			statusCode: 201,
+			data: cart,
+		});
+	}
+	if (cartItem && cartBody.size === cartItem.size) {
+		cartItem.updatedQuantity();
+		res.status(200).json({
+			statusCode: 200,
+			data: cartItem,
+		});
+	}
 });
 
 const updateCartItem = asyncHandler(async (req, res) => {

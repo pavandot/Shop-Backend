@@ -26,6 +26,14 @@ const productSchema = new Schema({
 	},
 });
 
+productSchema.statics.isProductExist = async (productId) => {
+	const product = await Product.findById(productId).lean();
+	if (product) {
+		return true;
+	}
+	return false;
+};
+
 const Product = model('Product', productSchema);
 
 module.exports = Product;

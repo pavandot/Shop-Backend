@@ -1,4 +1,6 @@
 const { check, validationResult } = require('express-validator');
+const asyncHandler = require('express-async-handler');
+
 const Brand = require('../../models/brandModel');
 exports.validateAddBrand = [
 	check('name')
@@ -8,8 +10,7 @@ exports.validateAddBrand = [
 		.withMessage('Name is required')
 		.isLength({ min: 3, max: 50 })
 		.withMessage('Name must be between 3 and 50 characters'),
-
-	async (req, res, next) => {
+	asyncHandler(async (req, res, next) => {
 		const errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
@@ -28,5 +29,5 @@ exports.validateAddBrand = [
 			});
 		}
 		next();
-	},
+	}),
 ];
