@@ -96,9 +96,11 @@ const getCartQuantity = asyncHandler(async (req, res) => {
 		const cartItems = await Cart.find({ user: req.user.id }).select('quantity').lean();
 
 		let totalQuantity = 0;
-		cartItems.forEach((item) => {
-			totalQuantity += item.quantity;
-		});
+		if (cartItems.length > 0) {
+			cartItems.forEach((item) => {
+				totalQuantity += item.quantity;
+			});
+		}
 		res.status(200).json({
 			statusCode: 200,
 			totalQuantity,
