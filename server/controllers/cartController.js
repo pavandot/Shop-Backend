@@ -111,10 +111,33 @@ const getCartQuantity = asyncHandler(async (req, res) => {
 	}
 });
 
+const deleteAllCartItems = asyncHandler(async (req, res) => {
+	try {
+		const cartItems = await Cart.find({ user: req.user.id });
+		if (!cartItems) {
+			return res.status(404).json({
+				statusCode: 404,
+				message: 'Cart items not found',
+			});
+		}
+		await Cart.deleteMany({ user: req.user.id });
+		res.status(200).json({
+			statusCode: 200,
+			message: 'Cart items deleted',
+		});
+	} catch (err) {
+		res.status(500).json({
+			statusCode: 500,
+			message: 'Server error',
+		});
+	}
+});
+
 module.exports = {
 	getCartItems,
 	addToCart,
 	updateCartItem,
 	deleteCartItem,
 	getCartQuantity,
+	deleteAllCartItems,
 };
