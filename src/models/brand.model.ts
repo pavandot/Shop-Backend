@@ -1,10 +1,10 @@
 import { Schema, model, Document } from 'mongoose';
 import { UserDocument } from './user.model';
-export interface brandInput {
+export interface BrandInput {
 	brand: string;
 }
 
-export interface brandDocument extends brandInput, Document {
+export interface BrandDocument extends BrandInput, Document {
 	user: UserDocument['_id'];
 	createdAt: Date;
 	updatedAt: Date;
@@ -20,6 +20,6 @@ const brandSchema = new Schema(
 	}
 );
 
-const BrandModel = model<brandDocument>('Brand', brandSchema);
+const BrandModel = model<BrandDocument>('Brand', brandSchema);
 
 export default BrandModel;
