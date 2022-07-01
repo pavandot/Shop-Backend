@@ -27,3 +27,39 @@ export const getBrands = async () => {
 		throw new Error(error);
 	}
 };
+
+export const getBrandByUserId = async (userId: string) => {
+	try {
+		const brands = await BrandModel.findOne({ user: userId });
+		if (!brands) {
+			return false;
+		}
+		return brands;
+	} catch (error: any) {
+		throw new Error(error);
+	}
+};
+
+export const deleteBrands = async (userId: string) => {
+	try {
+		const brand = await BrandModel.findOneAndDelete({ user: userId });
+		if (!brand) {
+			return false;
+		}
+		return brand;
+	} catch (error: any) {
+		throw new Error(error);
+	}
+};
+
+export const deleteBrand = async (userId: string, brandId: string) => {
+	try {
+		const brand = await BrandModel.findOneAndDelete({ user: userId, _id: brandId });
+		if (!brand) {
+			return false;
+		}
+		return brand;
+	} catch (error: any) {
+		throw new Error(error);
+	}
+};
