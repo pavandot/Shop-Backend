@@ -19,4 +19,17 @@ export const createUserSchema = object({
 		path: ['passwordConfirmation'],
 	}),
 });
+
+export const LoginUserSchema = object({
+	body: object({
+		email: string({
+			required_error: 'Email is required',
+		}).email('Email is invalid'),
+		password: string({
+			required_error: 'Password is required',
+		}).min(6, 'Password must be at least 6 characters'),
+	}),
+});
+
 export type CreateUserInput = OmitBy<TypeOf<typeof createUserSchema>, Split<'body.passwordConfirmation'>>;
+export type LoginUserInput = TypeOf<typeof LoginUserSchema>;
